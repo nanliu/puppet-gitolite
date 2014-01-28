@@ -35,6 +35,7 @@
 #
 # Copyright 2014 Your name here, unless otherwise noted.
 #
+# NOTE: RIGHT NOW REQUIRES GIT AND PERL-TIME-HIRES
 class gitolite(
   $group           = $gitolite::params::group,
   $user            = $gitolite::params::user,
@@ -68,7 +69,7 @@ class gitolite(
   }
 
   file { 'admin_key':
-    path    => "${homedir}/${key_user}.pub":
+    path    => "${homedir}/${key_user}.pub",
     ensure  => file,
     owner   => $user,
     group   => $group,
@@ -106,15 +107,17 @@ class gitolite(
   }
 
   exec { 'install_gitolite':
-    command     => "${homedir}/gitolite install -ln"
+    command     => "${homedir}/gitolite/install -ln ${homedir}/bin",
     user        => $user,
     refreshonly => true,
-    notify      => Exec['setup_gitolite']
+    notify      => Exec['setup_gitolite'],
+    require     => File["${homedir}/bin"],
   }
 
   exec { 'setup_gitolite':
     command     => "${homedir}/bin/gitolite setup -pk ${homedir}/${key_user}.pub",
     user        => $user,
+    environment => "HOME=${homedir}",
     refreshonly => true,
   }
 }
