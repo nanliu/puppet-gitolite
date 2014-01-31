@@ -1,11 +1,12 @@
 name    'puppet-gitolite'
 version '0.1.0'
-source 'UNKNOWN'
-author 'puppet'
+source 'git://github.com/eshamow/puppet-gitolite.git'
+author 'Eric J Shamow'
 license 'Apache License, Version 2.0'
-summary 'UNKNOWN'
-description 'UNKNOWN'
-project_page 'UNKNOWN'
+summary 'Module to install and configure gitolite'
+description 'Module to install and configure gitolite'
+project_page 'http://github.com/eshamow/puppet-gitolite'
 
 ## Add dependencies, if any:
-# dependency 'username/name', '>= 1.2.0'
+dependency 'nanliu/staging', '>= 0.3.1'
+dependency 'puppetlabs/vcsrepo', '>= 0.2.0'
