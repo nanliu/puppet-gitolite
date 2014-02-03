@@ -45,10 +45,17 @@ class gitolite(
   $source_location = $gitolite::params::source_location,
   $key_user        = undef,
   $pubkey          = undef,
+  $manage_perl     = false,
 ) inherits gitolite::params {
 
   if ($key_user == undef or $pubkey == undef) {
     fail("Must define key_user and pass pubkey")
+  }
+
+  if $manage_perl == 'package' {
+    package { $gitolite::params::perl_package:
+      ensure => installed,
+    }
   }
 
   group { $group:
