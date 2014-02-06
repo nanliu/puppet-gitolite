@@ -1,12 +1,18 @@
 class gitolite::params {
-  $group           = 'git'
-  $user            = 'git'
-  $homedir         = "/home/${user}"
+  $group_name      = 'git'
+  $user_name       = 'git'
+  $group_ensure    = true
+  $user_ensure     = true
+  $home_path       = "/home/${user}"
   $source_type     = 'git'
-  $source_location = 'git://github.com/sitaramc/gitolite'
+  $package_version = present
+  $source_path     = 'git://github.com/sitaramc/gitolite'
+  $key_user        = undef
+  $pubkey          = undef
+  $manage_perl     = false
 
   case $::osfamily {
     'redhat': { $perl_package = 'perl-Time-HiRes' }
-    default:  { fail("Perl package is undefined for ${operatingsystem}") }
+    default:  { $perl_package = undef }
   }
 }
