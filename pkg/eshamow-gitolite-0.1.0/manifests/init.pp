@@ -74,11 +74,11 @@ class gitolite(
 ) inherits gitolite::params {
 
   if ($key_user == undef or $pubkey == undef) {
-    fail('Must define key_user and pass pubkey')
+    fail("Must define key_user and pass pubkey")
   }
 
   if ($manage_perl == true and member(['redhat'], $::osfamily) == false) {
-    fail("Perl package is undefined for osfamily ${::osfamily}.")
+    fail("Perl package is undefined for osfamily ${osfamily}.")
   }
 
   if $manage_perl == 'package' {
@@ -101,7 +101,7 @@ class gitolite(
     }
   }
 
-  file { $home_path:
+  file { "${home_path}":
     ensure => directory,
     owner  => $user_name,
     group  => $group_name,
@@ -125,8 +125,8 @@ class gitolite(
   }
 
   file { 'admin_key':
-    ensure  => file,
     path    => "${home_path}/${key_user}.pub",
+    ensure  => file,
     owner   => $user_name,
     group   => $group_name,
     mode    => '0750',

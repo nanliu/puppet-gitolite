@@ -3,7 +3,7 @@ class gitolite::params {
   $user_name       = 'git'
   $group_ensure    = true
   $user_ensure     = true
-  $home_path       = "/home/${user_name}"
+  $home_path       = "/home/${user}"
   $source_type     = 'git'
   $package_version = present
   $source_path     = 'git://github.com/sitaramc/gitolite'
