@@ -4,10 +4,10 @@
 
 1. [Overview](#overview)
 2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - The basics of getting started with [puppet-gitolite]](#setup)
-    * [What [puppet-gitolite] affects](#what-[puppet-gitolite]-affects)
+3. [Setup - The basics of getting started with [eshamow-gitolite]](#setup)
+    * [What [eshamow-gitolite] affects](#what-[eshamow-gitolite]-affects)
     * [Setup requirements](#setup-requirements)
-    * [Beginning with [puppet-gitolite]](#beginning-with-[puppet-gitolite])
+    * [Beginning with [eshamow-gitolite]](#beginning-with-[eshamow-gitolite])
 4. [Usage - Configuration options and additional functionality](#usage)
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
@@ -29,7 +29,7 @@ Ubuntu 12.04
 
 ##Setup
 
-###What [puppet-gitolite] affects
+###What [eshamow-gitolite] affects
 
 * By default, creates 'git' user and group and /home/git directory
 * Populates homedir with expanded tarball or cloned git repo
@@ -41,7 +41,7 @@ Ubuntu 12.04
 * Expects 'git' binary to be installed/available. puppetlabs-git suffices for most systems.
 * Time::HiRes perl module must be installed/available. manage_perl => true will attempt to install via package manager only.
   
-###Beginning with [puppet-gitolite]  
+###Beginning with [eshamow-gitolite]  
 
 Classify node with gitolite and ensure that at a minimum key_user and pubkey parameters are configured in your Node Classifier or via data bindings.
 
