@@ -62,8 +62,8 @@
 class gitolite(
   $group_name      = $gitolite::params::group_name,
   $user_name       = $gitolite::params::user_name,
-  $group_ensure    = $gitolite::params::group_ensure
-  $user_ensure     = $gitolite::params::user_ensure
+  $group_ensure    = $gitolite::params::group_ensure,
+  $user_ensure     = $gitolite::params::user_ensure,
   $home_path       = $gitolite::params::home_path,
   $source_type     = $gitolite::params::source_type,
   $package_version = $gitolite::params::package_version,
