@@ -39,6 +39,8 @@
 class gitolite(
   $group           = $gitolite::params::group,
   $user            = $gitolite::params::user,
+  $manage_group    = true,
+  $manage_user     = true,
   $homedir         = $gitolite::params::homedir,
   $source_type     = $gitolite::params::source_type,
   $package_version = present,
@@ -58,21 +60,41 @@ class gitolite(
     }
   }
 
-  group { $group:
-    ensure => present,
+  if $manage_group == true {
+    group { $group:
+      ensure => present,
+    }
   }
 
-  user { $user:
-    ensure     => present,
-    gid        => $group,
-    managehome => true,
+  if $manage_user == true {
+    user { $user:
+      ensure     => present,
+      gid        => $group,
+      managehome => true,
+    }
   }
+
+  file { "${homedir}":
+    ensure => directory,
+    owner => $user,
+    group => $group,
+    mode => '0750',
+  } ->
 
   file { "${homedir}/bin":
     ensure => directory,
     owner  => $user,
     group  => $group,
-    mode   => '0700',
+    mode   => '0750',
+    recurse => true,
+  } ->
+
+  file { "${homedir}/repositories":
+    ensure => directory,
+    owner  => $user,
+    group  => $group,
+    mode   => '0750',
+    recurse => true,
   }
 
   file { 'admin_key':
@@ -80,7 +102,7 @@ class gitolite(
     ensure  => file,
     owner   => $user,
     group   => $group,
-    mode    => '0700',
+    mode    => '0750',
     content => $pubkey,
   }
 
@@ -89,14 +111,12 @@ class gitolite(
       package { 'gitolite':
         ensure    => $package_version,
         source    => $source_location,
-        subscribe => File['admin_key'],
         notify    => Exec['install_gitolite'],
       }
     }
     'tarball': {
       staging::file { 'gitolite':
         source    => $source_location,
-        subscribe => File['admin_key'],
         notify    => Exec['install_gitolite'],
       }
     }
@@ -106,7 +126,6 @@ class gitolite(
         provider  => git,
         user      => $user,
         source    => $source_location,
-        subscribe => File['admin_key'],
         notify    => Exec['install_gitolite'],
       }
     }
@@ -118,7 +137,8 @@ class gitolite(
     user        => $user,
     refreshonly => true,
     notify      => Exec['setup_gitolite'],
-    require     => File["${homedir}/bin"],
+    require     => [File["${homedir}/bin"], File['admin_key']],
+    before      => File["${homedir}/repositories"],
   }
 
   exec { 'setup_gitolite':
@@ -126,5 +146,8 @@ class gitolite(
     user        => $user,
     environment => "HOME=${homedir}",
     refreshonly => true,
+    require => File["${homedir}/bin"],
+    before  => File["${homedir}/repositories"],
   }
+
 }
