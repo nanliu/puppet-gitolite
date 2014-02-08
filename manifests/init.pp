@@ -70,14 +70,15 @@ class gitolite(
   $source_path     = $gitolite::params::source_path,
   $key_user        = $gitolite::params::key_user,
   $pubkey          = $gitolite::params::pubkey,
-  $manage_perl     = $gitolite::params::manage_perl
+  $manage_perl     = $gitolite::params::manage_perl,
+  $perl_package    = $gitolite::params::perl_package
 ) inherits gitolite::params {
 
   if ($key_user == undef or $pubkey == undef) {
     fail('Must define key_user and pass pubkey')
   }
 
-  if ($manage_perl == true and member(['redhat'], $::osfamily) == false) {
+  if ($manage_perl == 'package' and $perl_package == undef) {
     fail("Perl package is undefined for osfamily ${::osfamily}.")
   }
 
