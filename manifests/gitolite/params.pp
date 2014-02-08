@@ -13,6 +13,7 @@ class gitolite::params {
 
   case $::osfamily {
     'redhat': { $perl_package = 'perl-Time-HiRes' }
+    'debian': { $perl_package = 'libtime-hires-perl' }
     default:  { $perl_package = undef }
   }
 }
