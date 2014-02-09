@@ -21,10 +21,10 @@ Module to manage gitolite v3. There is no granular resource or ACL management - 
 
 Downloads and installs gitolite from git, or grabs .tar.gz or package to do the same, drops admin key, and operates the basic gitolite commands to initialize the admin repository.
 
-Currently supports RHEL or CentOS 6 only. Future targets:
+Currently supports RHEL or CentOS 6 and Debian 6 only. Future targets:
 
-RHEL 5 or 6
-Debian 6 or 7
+RHEL 5
+Debian 7
 Ubuntu 12.04
 
 ##Setup
