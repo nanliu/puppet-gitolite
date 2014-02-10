@@ -1,0 +1,9 @@
+HOSTS:
+  sles-11sp1-x64:
+    roles:
+      - master
+    platform: sles-11sp1-x64
+    box : sles-11sp1-x64-vbox4210-nocm
+    box_url : http://puppet-vagrant-boxes.puppetlabs.com/sles-11sp1-x64-vbox4210-nocm.box
+    hypervisor : vagrant
+    pe_dir : http://neptune.puppetlabs.lan/archives/releases/3.1.2/
