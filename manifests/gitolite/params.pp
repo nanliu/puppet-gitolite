@@ -12,7 +12,13 @@ class gitolite::params {
   $manage_perl     = false
 
   case $::osfamily {
-    'redhat': { $perl_package = 'perl-Time-HiRes' }
+    'redhat': {
+      case $::operatingsystemmajrelease {
+        '5': { $perl_package = 'perl-Time-modules' }
+        '6': { $perl_package = 'perl-Time-HiRes' }
+        default: { $perl_package = undef }
+      }
+    }
     'debian': { $perl_package = 'libtime-hires-perl' }
     default:  { $perl_package = undef }
   }
