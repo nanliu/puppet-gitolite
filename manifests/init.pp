@@ -164,6 +164,7 @@ class gitolite(
     command     => "${home_path}/gitolite/install -ln ${home_path}/bin",
     user        => $user_name,
     refreshonly => true,
+    cwd         => "${home_path}/gitolite",
     notify      => Exec['setup_gitolite'],
     subscribe   => [File["${home_path}/bin"], File['admin_key']],
     before      => File["${home_path}/repositories"],
@@ -172,6 +173,7 @@ class gitolite(
   exec { 'setup_gitolite':
     command     => "${home_path}/bin/gitolite setup -pk ${home_path}/${key_user}.pub",
     user        => $user_name,
+    cwd         => "${home_path}/gitolite",
     environment => "HOME=${home_path}",
     refreshonly => true,
     require     => File["${home_path}/bin"],
