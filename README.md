@@ -23,13 +23,9 @@ Downloads and installs gitolite from git, or grabs .tar.gz or package to do the 
 
 Currently Supported:
 
-RHEL 6
+RHEL 5 and 6
 Debian 6 and 7
 Ubuntu 12.04
-
-Future support:
-
-RHEL 5
 
 ##Setup
 

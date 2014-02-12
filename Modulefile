@@ -1,5 +1,5 @@
 name    'eshamow-gitolite'
-version '0.1.3'
+version '0.2.0'
 source 'git://github.com/eshamow/eshamow-gitolite.git'
 author 'Eric J Shamow'
 license 'Apache License, Version 2.0'
