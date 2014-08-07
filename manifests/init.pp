@@ -123,7 +123,6 @@ class gitolite(
     owner   => $user_name,
     group   => $group_name,
     mode    => '0750',
-    recurse => true,
   }
 
   file { 'admin_key':
