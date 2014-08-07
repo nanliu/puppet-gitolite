@@ -98,6 +98,7 @@ class gitolite(
     user { $user_name:
       ensure     => present,
       gid        => $group_name,
+      home       => $home_path,
       managehome => true,
     }
   }
